@@ -1,3 +1,8 @@
+# Graph preview images (generated locally, not tracked)
+graph-previews/
+# Generated Mermaid files
+*.mmd
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

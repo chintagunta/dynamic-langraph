@@ -34,6 +34,9 @@ dev = [
     "mkdocs-material>=9.5",
 ]
 
+[project.scripts]
+dlg = "dlg.__main__:main"
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
@@ -44,3 +47,9 @@ python_version = "3.11"
 
 [tool.hatch.build.targets.wheel]
 packages = ["dlg"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.4.0",
+]
