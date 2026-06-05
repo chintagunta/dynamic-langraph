@@ -1,0 +1,44 @@
+{
+  "graph_id": "information-gather-prompting",
+  "version": "1.0.0",
+  "state_definition": {
+    "type": "typed_dict",
+    "module_path": "examples_py.chatbots.information_gather_prompting.state",
+    "class_name": "GatheringState"
+  },
+  "nodes": [
+    {
+      "name": "gather_info",
+      "handler": {
+        "module_path": "examples_py.chatbots.information_gather_prompting.nodes",
+        "function_name": "ask_clarifying_question"
+      }
+    },
+    {
+      "name": "respond",
+      "handler": {
+        "module_path": "examples_py.chatbots.information_gather_prompting.nodes",
+        "function_name": "generate_response"
+      }
+    }
+  ],
+  "edges": {
+    "entry_point": "gather_info",
+    "static_edges": [
+      {"from": "respond", "to": "__end__"}
+    ],
+    "conditional_edges": [
+      {
+        "from": "gather_info",
+        "router": {
+          "module_path": "examples_py.chatbots.information_gather_prompting.nodes",
+          "function_name": "has_enough_info"
+        },
+        "path_map": {
+          "gather": "gather_info",
+          "respond": "respond"
+        }
+      }
+    ]
+  }
+}

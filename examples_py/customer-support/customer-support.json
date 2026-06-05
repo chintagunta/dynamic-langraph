@@ -1,0 +1,61 @@
+{
+  "graph_id": "customer-support",
+  "version": "1.0.0",
+  "state_definition": {
+    "type": "typed_dict",
+    "module_path": "examples_py.customer_support.customer_support.state",
+    "class_name": "SupportState"
+  },
+  "nodes": [
+    {
+      "name": "router",
+      "handler": {
+        "module_path": "examples_py.customer_support.customer_support.nodes",
+        "function_name": "route_request"
+      }
+    },
+    {
+      "name": "billing_agent",
+      "handler": {
+        "module_path": "examples_py.customer_support.customer_support.nodes",
+        "function_name": "handle_billing"
+      }
+    },
+    {
+      "name": "technical_agent",
+      "handler": {
+        "module_path": "examples_py.customer_support.customer_support.nodes",
+        "function_name": "handle_technical"
+      }
+    },
+    {
+      "name": "general_agent",
+      "handler": {
+        "module_path": "examples_py.customer_support.customer_support.nodes",
+        "function_name": "handle_general"
+      }
+    }
+  ],
+  "edges": {
+    "entry_point": "router",
+    "static_edges": [
+      {"from": "billing_agent", "to": "__end__"},
+      {"from": "technical_agent", "to": "__end__"},
+      {"from": "general_agent", "to": "__end__"}
+    ],
+    "conditional_edges": [
+      {
+        "from": "router",
+        "router": {
+          "module_path": "examples_py.customer_support.customer_support.nodes",
+          "function_name": "classify_intent"
+        },
+        "path_map": {
+          "billing": "billing_agent",
+          "technical": "technical_agent",
+          "general": "general_agent"
+        }
+      }
+    ]
+  }
+}

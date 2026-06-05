@@ -1,0 +1,53 @@
+{
+  "graph_id": "wait-user-input",
+  "version": "1.0.0",
+  "state_definition": {
+    "type": "typed_dict",
+    "module_path": "examples_py.human_in_the_loop.wait_user_input.state",
+    "class_name": "HumanLoopState"
+  },
+  "nodes": [
+    {
+      "name": "agent",
+      "handler": {
+        "module_path": "examples_py.human_in_the_loop.wait_user_input.nodes",
+        "function_name": "agent_step"
+      }
+    },
+    {
+      "name": "human_review",
+      "handler": {
+        "module_path": "examples_py.human_in_the_loop.wait_user_input.nodes",
+        "function_name": "human_review_step"
+      },
+      "interrupt_before": true
+    },
+    {
+      "name": "execute",
+      "handler": {
+        "module_path": "examples_py.human_in_the_loop.wait_user_input.nodes",
+        "function_name": "execute_action"
+      }
+    }
+  ],
+  "edges": {
+    "entry_point": "agent",
+    "static_edges": [
+      {"from": "human_review", "to": "execute"},
+      {"from": "execute", "to": "__end__"}
+    ],
+    "conditional_edges": [
+      {
+        "from": "agent",
+        "router": {
+          "module_path": "examples_py.human_in_the_loop.wait_user_input.nodes",
+          "function_name": "needs_human_review"
+        },
+        "path_map": {
+          "review": "human_review",
+          "end": "__end__"
+        }
+      }
+    ]
+  }
+}

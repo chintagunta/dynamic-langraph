@@ -1,0 +1,52 @@
+{
+  "graph_id": "agent-simulation-evaluation",
+  "version": "1.0.0",
+  "state_definition": {
+    "type": "typed_dict",
+    "module_path": "examples_py.chatbot_simulation_evaluation.agent_simulation_evaluation.state",
+    "class_name": "SimulationState"
+  },
+  "nodes": [
+    {
+      "name": "simulated_user",
+      "handler": {
+        "module_path": "examples_py.chatbot_simulation_evaluation.agent_simulation_evaluation.nodes",
+        "function_name": "simulate_user_turn"
+      }
+    },
+    {
+      "name": "chatbot",
+      "handler": {
+        "module_path": "examples_py.chatbot_simulation_evaluation.agent_simulation_evaluation.nodes",
+        "function_name": "chatbot_turn"
+      }
+    },
+    {
+      "name": "evaluator",
+      "handler": {
+        "module_path": "examples_py.chatbot_simulation_evaluation.agent_simulation_evaluation.nodes",
+        "function_name": "evaluate_conversation"
+      }
+    }
+  ],
+  "edges": {
+    "entry_point": "simulated_user",
+    "static_edges": [
+      {"from": "simulated_user", "to": "chatbot"},
+      {"from": "evaluator", "to": "__end__"}
+    ],
+    "conditional_edges": [
+      {
+        "from": "chatbot",
+        "router": {
+          "module_path": "examples_py.chatbot_simulation_evaluation.agent_simulation_evaluation.nodes",
+          "function_name": "should_continue_simulation"
+        },
+        "path_map": {
+          "continue": "simulated_user",
+          "evaluate": "evaluator"
+        }
+      }
+    ]
+  }
+}

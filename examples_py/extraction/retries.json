@@ -1,0 +1,49 @@
+{
+  "graph_id": "extraction-with-retries",
+  "version": "1.0.0",
+  "state_definition": {
+    "type": "pydantic",
+    "module_path": "examples_py.extraction.retries.state",
+    "class_name": "ExtractionState"
+  },
+  "nodes": [
+    {
+      "name": "extract",
+      "handler": {
+        "module_path": "examples_py.extraction.retries.nodes",
+        "function_name": "extract_data"
+      },
+      "retry_policy": {
+        "max_attempts": 3,
+        "initial_interval": 1.0,
+        "backoff_factor": 2.0
+      }
+    },
+    {
+      "name": "validate",
+      "handler": {
+        "module_path": "examples_py.extraction.retries.nodes",
+        "function_name": "validate_extraction"
+      }
+    }
+  ],
+  "edges": {
+    "entry_point": "extract",
+    "static_edges": [
+      {"from": "extract", "to": "validate"}
+    ],
+    "conditional_edges": [
+      {
+        "from": "validate",
+        "router": {
+          "module_path": "examples_py.extraction.retries.nodes",
+          "function_name": "route_validation_result"
+        },
+        "path_map": {
+          "retry": "extract",
+          "end": "__end__"
+        }
+      }
+    ]
+  }
+}

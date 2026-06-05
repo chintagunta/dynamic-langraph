@@ -1,0 +1,24 @@
+site_name: DLG — DynamicLangGraph Engine
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Concepts:
+      - JSON Schema: concepts/json-schema.md
+      - Validation: concepts/validation.md
+      - Persistence: concepts/persistence.md
+      - Interrupts: concepts/interrupts.md
+      - Send API: concepts/send-api.md
+      - Subgraphs: concepts/subgraphs.md
+      - Streaming: concepts/streaming.md
+  - API Reference:
+      - DLGValidator: api-reference/dlgvalidator.md
+      - DLGCompiler: api-reference/dlgcompiler.md
+      - Exceptions: api-reference/exceptions.md
+      - Testing: api-reference/testing.md
+  - Examples:
+      - Hello World: examples/hello-world.md
+      - Human Review: examples/human-review.md
+      - Map-Reduce: examples/map-reduce.md
+      - Subgraph Composition: examples/subgraph-composition.md

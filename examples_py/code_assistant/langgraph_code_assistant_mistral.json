@@ -1,0 +1,70 @@
+{
+  "graph_id": "langgraph-code-assistant-mistral",
+  "version": "1.0.0",
+  "state_definition": {
+    "type": "typed_dict",
+    "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.state",
+    "class_name": "CodeAssistantState"
+  },
+  "nodes": [
+    {
+      "name": "retrieve",
+      "handler": {
+        "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.nodes",
+        "function_name": "retrieve_docs"
+      }
+    },
+    {
+      "name": "generate",
+      "handler": {
+        "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.nodes",
+        "function_name": "generate_code_mistral"
+      }
+    },
+    {
+      "name": "check_code",
+      "handler": {
+        "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.nodes",
+        "function_name": "check_code_imports"
+      }
+    },
+    {
+      "name": "check_hallucination",
+      "handler": {
+        "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.nodes",
+        "function_name": "check_hallucination"
+      }
+    }
+  ],
+  "edges": {
+    "entry_point": "retrieve",
+    "static_edges": [
+      {"from": "retrieve", "to": "generate"},
+      {"from": "check_hallucination", "to": "__end__"}
+    ],
+    "conditional_edges": [
+      {
+        "from": "generate",
+        "router": {
+          "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.nodes",
+          "function_name": "route_after_generate"
+        },
+        "path_map": {
+          "check_code": "check_code",
+          "check_hallucination": "check_hallucination"
+        }
+      },
+      {
+        "from": "check_code",
+        "router": {
+          "module_path": "examples_py.code_assistant.langgraph_code_assistant_mistral.nodes",
+          "function_name": "route_after_check"
+        },
+        "path_map": {
+          "regenerate": "generate",
+          "check_hallucination": "check_hallucination"
+        }
+      }
+    ]
+  }
+}
