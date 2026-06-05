@@ -1,11 +1,11 @@
-# DLG — DynamicLangGraph Engine
+# DynamicLangGraph Engine
 
-`dlg` converts JSON configuration documents into compiled, executable LangGraph graphs.
+`dynamic-langgraph` converts JSON configuration documents into compiled, executable LangGraph graphs.
 
 ## Installation
 
 ```bash
-pip install dlg
+pip install dynamic-langgraph
 ```
 
 ## Quickstart

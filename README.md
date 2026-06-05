@@ -1,14 +1,14 @@
-# dlg — DynamicLangGraph Engine
+# dynamic-langgraph — DynamicLangGraph Engine
 
-[![CI](https://github.com/your-org/dlg/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/dlg/actions/workflows/ci.yml)
-[![PyPI version](https://img.shields.io/pypi/v/dlg)](https://pypi.org/project/dlg/)
-[![Python versions](https://img.shields.io/pypi/pyversions/dlg)](https://pypi.org/project/dlg/)
+[![CI](https://github.com/your-org/dynamic-langgraph/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/dynamic-langgraph/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/dynamic-langgraph)](https://pypi.org/project/dynamic-langgraph/)
+[![Python versions](https://img.shields.io/pypi/pyversions/dynamic-langgraph)](https://pypi.org/project/dynamic-langgraph/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen)]()
 
 **Build LangGraph graphs from JSON configuration — no hardcoded topologies.**
 
-`dlg` is a Python library that converts declarative JSON config documents into fully compiled, executable [LangGraph](https://github.com/langchain-ai/langgraph) graphs. Define your nodes, edges, state schema, and execution settings in JSON. The engine validates, compiles, and hands you back an async-ready graph.
+`dynamic-langgraph` is a Python library that converts declarative JSON config documents into fully compiled, executable [LangGraph](https://github.com/langchain-ai/langgraph) graphs. Define your nodes, edges, state schema, and execution settings in JSON. The engine validates, compiles, and hands you back an async-ready graph.
 
 ---
 
@@ -40,14 +40,14 @@
 ## Installation
 
 ```bash
-pip install dlg
+pip install dynamic-langgraph
 ```
 
 **From source (development):**
 
 ```bash
-git clone https://github.com/your-org/dlg.git
-cd dlg
+git clone https://github.com/your-org/dynamic-langgraph.git
+cd dynamic-langgraph
 uv pip install -e ".[dev]"
 ```
 

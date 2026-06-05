@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "dlg"
+name = "dynamic-langgraph"
 version = "0.1.0"
 description = "Build LangGraph graphs from JSON configuration"
 readme = "README.md"
@@ -41,3 +41,6 @@ testpaths = ["tests"]
 [tool.mypy]
 strict = true
 python_version = "3.11"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dlg"]
